@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jakefleming/font-proof-mcp",
+  "description": "Create and modify Font Proof documents programmatically. Font Proof is a macOS app for type designers that generates PDF font proofs and live-reloads them from Glyphs.app.",
+  "repository": {
+    "url": "https://github.com/jakefleming/font-proof-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://fontproof.com",
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "font-proof-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
