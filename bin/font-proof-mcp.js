@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * font-proof-mcp: launcher for the Font Proof MCP server.
+ * font-proof-mcp: launcher for the Hellbox MCP server.
  *
- * The actual MCP server is a Swift binary that ships inside the Font Proof
+ * The actual MCP server is a Swift binary that ships inside the Hellbox
  * app bundle (Contents/Helpers/font-proof-mcp), codesigned with the app and
  * always in sync with the app's document format. This package just finds it
  * and hands over stdio, so MCP clients can use the standard `npx` install
@@ -10,9 +10,11 @@
  *
  * Resolution order:
  *   1. FONT_PROOF_MCP_PATH environment variable (explicit override)
- *   2. /Applications/Font Proof.app
- *   3. ~/Applications/Font Proof.app
- *   4. Spotlight lookup by bundle id (com.FontProof)
+ *   2. /Applications/Hellbox.app, then ~/Applications/Hellbox.app
+ *   3. /Applications/Font Proof.app, then ~/Applications/Font Proof.app
+ *      (pre-rename installs)
+ *   4. Spotlight lookup by bundle id (com.FontProof, unchanged across
+ *      the rename)
  *
  * All diagnostics go to stderr; stdout is reserved for MCP JSON-RPC.
  */
@@ -38,6 +40,8 @@ function findServerBinary() {
   }
 
   const candidates = [
+    join('/Applications', 'Hellbox.app', HELPER_RELATIVE),
+    join(os.homedir(), 'Applications', 'Hellbox.app', HELPER_RELATIVE),
     join('/Applications', 'Font Proof.app', HELPER_RELATIVE),
     join(os.homedir(), 'Applications', 'Font Proof.app', HELPER_RELATIVE),
   ];
@@ -67,7 +71,7 @@ function findServerBinary() {
 function main() {
   if (process.platform !== 'darwin') {
     process.stderr.write(
-      'font-proof-mcp: Font Proof is a macOS app; this MCP server only runs on macOS.\n'
+      'font-proof-mcp: Hellbox is a macOS app; this MCP server only runs on macOS.\n'
     );
     process.exit(1);
   }
@@ -76,12 +80,12 @@ function main() {
   if (!binary) {
     process.stderr.write(
       [
-        'font-proof-mcp: could not find the Font Proof app.',
-        'The MCP server ships inside the Font Proof app bundle.',
-        'Install Font Proof from https://fontproof.com and try again.',
+        'font-proof-mcp: could not find the Hellbox app.',
+        'The MCP server ships inside the Hellbox app bundle.',
+        'Install Hellbox from https://hellbox.com and try again.',
         'If the app is installed in a non-standard location, set',
         'FONT_PROOF_MCP_PATH to the full path of',
-        `"Font Proof.app/${HELPER_RELATIVE}".`,
+        `"Hellbox.app/${HELPER_RELATIVE}".`,
         '',
       ].join('\n')
     );

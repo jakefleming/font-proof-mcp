@@ -1,7 +1,7 @@
 {
   "name": "font-proof-mcp",
-  "version": "0.1.0",
-  "description": "Create and modify Font Proof documents programmatically. Font Proof is a macOS app for type designers that generates PDF font proofs and live-reloads them from Glyphs.app.",
+  "version": "0.2.0",
+  "description": "MCP server launcher for Hellbox (formerly Font Proof), the macOS font proofing app. Lets AI tools create and edit .fontproof documents.",
   "mcpName": "io.github.jakefleming/font-proof-mcp",
   "bin": {
     "font-proof-mcp": "bin/font-proof-mcp.js"
@@ -26,7 +26,7 @@
   ],
   "author": "Jake Fleming (Minim Industries)",
   "license": "MIT",
-  "homepage": "https://fontproof.com",
+  "homepage": "https://hellbox.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jakefleming/font-proof-mcp.git"
